@@ -1,0 +1,26 @@
+.sidebar {
+  width: 220px;
+  background-color: #f1f2f6;
+  height: 100vh;
+  padding: 20px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-list li {
+  margin-bottom: 20px;
+}
+
+.sidebar-list a {
+  text-decoration: none;
+  color: #2f3542;
+  font-weight: 600;
+}
+
+.sidebar-list a:hover {
+  color: #3742fa;
+}

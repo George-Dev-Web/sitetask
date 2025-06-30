@@ -1,0 +1,20 @@
+.project-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+}
+
+.project-card h3 {
+  margin: 0 0 8px;
+}
+
+.project-card p {
+  margin: 0 0 12px;
+}
+
+.project-card .actions {
+  display: flex;
+  gap: 12px;
+}
