@@ -285,8 +285,8 @@ def delete_task(task_id):
     
     return jsonify({'message': 'Task deleted successfully'})
 
-# # --- Main Application ---
-# if __name__ == '__main__':
-#     with app.app_context():
-#         db.create_all()
-#     app.run(debug=True)
+# --- Main Application ---
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
