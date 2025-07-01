@@ -289,6 +289,39 @@ def delete_task(task_id):
     
     return jsonify({'message': 'Task deleted successfully'})
 
+# 📍 Add this near your other routes
+@app.route('/api/dashboard/stats', methods=['GET'])
+@jwt_required()
+def dashboard_stats():
+    current_user_id = get_jwt_identity()
+
+    # Count total projects
+    project_count = Project.query.filter_by(user_id=current_user_id).count()
+
+    # Count total tasks
+    task_count = Task.query.join(Project).filter(Project.user_id == current_user_id).count()
+
+    # Count completed tasks
+    completed_task_count = Task.query.join(Project).filter(
+        Project.user_id == current_user_id,
+        Task.status == 'Completed'
+    ).count()
+
+    # Fetch 5 most recent projects
+    recent_projects = Project.query.filter_by(user_id=current_user_id) \
+        .order_by(Project.start_date.desc()).limit(5).all()
+
+    return jsonify({
+        'projects': project_count,
+        'tasks': task_count,
+        'completed_tasks': completed_task_count,
+        'recent_projects': [
+            {'id': p.id, 'name': p.name, 'description': p.description}
+            for p in recent_projects
+        ]
+    })
+
+
 # --- Main Application ---
 if __name__ == '__main__':
     with app.app_context():
