@@ -21,7 +21,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///sit
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET', 'super-secret-key-change-me')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {
+    "origins": [
+        "http://localhost:5173",   # for local dev
+        "http://127.0.0.1:5173",   # just in case
+        "https://sitetask.vercel.app"  # for production
+    ]
+}}, supports_credentials=True)
 
 # Initialize extensions
 db = SQLAlchemy(app)
