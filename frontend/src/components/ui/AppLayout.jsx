@@ -1,19 +1,16 @@
-// src/components/shared/AppLayout.jsx
+// src/components/ui/AppLayout.jsx
 import React from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import "../../styles/AppLayout.css";
-import { Outlet } from "react-router-dom";
 
-const AppLayout = () => {
+const AppLayout = ({ children }) => {
   return (
-    <div>
+    <div className="app-wrapper">
       <Navbar />
       <div className="app-layout">
         <Sidebar />
-        <div className="main-content">
-          <Outlet /> {/* This is where page content shows */}
-        </div>
+        <div className="main-content">{children}</div>
       </div>
     </div>
   );

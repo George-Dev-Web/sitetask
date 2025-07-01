@@ -1,24 +1,32 @@
 .task-form {
-  margin-bottom: 20px;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  align-items: center;
 }
 
-.task-form input,
-.task-form select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.task-input,
+.task-select {
+  padding: 0.65rem;
+  font-size: 1rem;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  flex: 1;
+  min-width: 200px;
 }
 
-.task-form button {
-  background-color: #1e90ff;
+.task-submit-btn {
+  padding: 0.65rem 1.2rem;
+  background-color: #2e86de;
   color: white;
-  padding: 8px 16px;
+  font-weight: 500;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.task-form button:hover {
-  background-color: #0056b3;
+.task-submit-btn:hover {
+  background-color: #1b4f72;
 }

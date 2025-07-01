@@ -2,7 +2,8 @@
 import React, { useContext } from "react";
 import { ProjectContext } from "../../context/ProjectContext";
 import ProjectCard from "./ProjectCard";
-// import Spinner from "../shared/Spinner";
+import Spinner from "../ui/Spinner";
+import "../../styles/ProjectList.css"; // Import your CSS styles
 
 const ProjectList = () => {
   const { projects, loading } = useContext(ProjectContext);

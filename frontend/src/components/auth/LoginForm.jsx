@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { login } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import "../../styles/AuthPage.css"; // 👈 import the styles
+import "../../styles/LoginForm.css"; // ✅ corrected to match your structure
 
 const LoginForm = () => {
   const { login: loginUser } = useContext(AuthContext);
@@ -27,14 +27,14 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="login-form">
-      <h2 className="login-title">Login</h2>
+    <form onSubmit={handleSubmit} className="form-wrapper">
+      <h2 className="form-title">Login</h2>
       <input
         name="username"
         value={form.username}
         onChange={handleChange}
         placeholder="Username"
-        className="login-input"
+        className="form-input"
       />
       <input
         name="password"
@@ -42,10 +42,10 @@ const LoginForm = () => {
         value={form.password}
         onChange={handleChange}
         placeholder="Password"
-        className="login-input"
+        className="form-input"
       />
-      {error && <p className="login-error">{error}</p>}
-      <button type="submit" className="login-button">
+      {error && <p className="form-error">{error}</p>}
+      <button type="submit" className="form-button">
         Login
       </button>
     </form>

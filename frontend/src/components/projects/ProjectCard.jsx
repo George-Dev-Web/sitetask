@@ -1,6 +1,7 @@
 // src/components/projects/ProjectCard.jsx
 import React, { useState, useContext } from "react";
 import { ProjectContext } from "../../context/ProjectContext";
+import "../../styles/ProjectCard.css";
 
 const ProjectCard = ({ project }) => {
   const { updateProject, deleteProject } = useContext(ProjectContext);
@@ -19,41 +20,41 @@ const ProjectCard = ({ project }) => {
   };
 
   return (
-    <div className="border p-4 space-y-2">
+    <div className="project-card">
       {editing ? (
         <>
           <input
             name="name"
             value={form.name}
             onChange={handleChange}
-            className="border px-2 py-1 w-full"
+            className="project-input"
           />
           <textarea
             name="description"
             value={form.description}
             onChange={handleChange}
-            className="border px-2 py-1 w-full"
+            className="project-textarea"
           />
-          <button
-            onClick={handleUpdate}
-            className="bg-green-600 text-white px-4 py-1"
-          >
+          <button onClick={handleUpdate} className="project-save-btn">
             Save
           </button>
         </>
       ) : (
         <>
-          <h3 className="font-bold text-lg">{project.name}</h3>
-          <p>{project.description}</p>
+          <h3 className="project-title">{project.name}</h3>
+          <p className="project-description">{project.description}</p>
         </>
       )}
-      <div className="space-x-2">
-        <button onClick={() => setEditing(!editing)} className="text-blue-500">
+      <div className="project-actions">
+        <button
+          onClick={() => setEditing(!editing)}
+          className="project-edit-btn"
+        >
           {editing ? "Cancel" : "Edit"}
         </button>
         <button
           onClick={() => deleteProject(project.id)}
-          className="text-red-500"
+          className="project-delete-btn"
         >
           Delete
         </button>

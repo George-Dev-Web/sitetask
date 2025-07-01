@@ -1,6 +1,7 @@
 // src/components/projects/ProjectForm.jsx
 import React, { useState, useContext } from "react";
 import { ProjectContext } from "../../context/ProjectContext";
+import "../../styles/ProjectForm.css";
 
 const ProjectForm = () => {
   const { createProject } = useContext(ProjectContext);
@@ -16,22 +17,22 @@ const ProjectForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2">
+    <form onSubmit={handleSubmit} className="project-form">
       <input
         name="name"
         value={form.name}
         onChange={handleChange}
         placeholder="Project Name"
-        className="border px-2 py-1 w-full"
+        className="project-input"
       />
       <textarea
         name="description"
         value={form.description}
         onChange={handleChange}
         placeholder="Project Description"
-        className="border px-2 py-1 w-full"
+        className="project-textarea"
       />
-      <button type="submit" className="bg-blue-600 text-white px-4 py-1">
+      <button type="submit" className="project-button">
         Add Project
       </button>
     </form>

@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import AuthPage from "./pages/AuthPage"; // 👈 Combined login/register page
+import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import TasksPage from "./pages/TasksPage";
@@ -24,27 +24,49 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Auth Page - handles both login and register */}
+        {/* Auth Page handles both login and register */}
         <Route
           path="/auth"
           element={token ? <Navigate to="/dashboard" /> : <AuthPage />}
         />
 
-        {/* Protected Routes with Layout */}
+        {/* Dashboard with full layout */}
         <Route
-          path="/"
+          path="/dashboard"
           element={
             <ProtectedRoute>
-              <AppLayout />
+              <AppLayout>
+                <DashboardPage />
+              </AppLayout>
             </ProtectedRoute>
           }
-        >
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="projects" element={<ProjectsPage />} />
-          <Route path="tasks" element={<TasksPage />} />
-        </Route>
+        />
 
-        {/* Fallback route */}
+        {/* Projects */}
+        <Route
+          path="/projects"
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <ProjectsPage />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Tasks */}
+        <Route
+          path="/tasks"
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <TasksPage />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Catch-all redirect */}
         <Route
           path="*"
           element={<Navigate to={token ? "/dashboard" : "/auth"} />}

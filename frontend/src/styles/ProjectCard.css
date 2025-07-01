@@ -1,20 +1,60 @@
 .project-card {
-  background-color: #fff;
   border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 16px;
-  border-radius: 6px;
+  border-radius: 8px;
+  padding: 1.2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
 .project-card h3 {
-  margin: 0 0 8px;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  color: #111;
 }
 
 .project-card p {
-  margin: 0 0 12px;
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1rem;
 }
 
-.project-card .actions {
-  display: flex;
-  gap: 12px;
+.project-card input,
+.project-card textarea {
+  padding: 0.6rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+
+.project-card button {
+  padding: 0.5rem 0.9rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.project-card .edit-btn {
+  color: #007bff;
+  background: transparent;
+}
+
+.project-card .delete-btn {
+  color: #dc3545;
+  background: transparent;
+  margin-left: 1rem;
+}
+
+.project-card .save-btn {
+  background-color: #28a745;
+  color: #fff;
+  margin-top: 0.5rem;
 }

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import API from "../../services/api";
 import TaskCard from "./TaskCard";
 import TaskForm from "./TaskForm";
+import "../../styles/TaskList.css";
 
 const TaskList = ({ projectId }) => {
   const [tasks, setTasks] = useState([]);
@@ -29,10 +30,10 @@ const TaskList = ({ projectId }) => {
     fetchTasks();
   }, [fetchTasks]);
 
-  if (loading) return <p>Loading tasks...</p>;
+  if (loading) return <p className="task-loading">Loading tasks...</p>;
 
   return (
-    <div className="space-y-4 mt-4">
+    <div className="task-list">
       <TaskForm projectId={projectId} onTaskCreated={handleAdd} />
       {tasks.map((task) => (
         <TaskCard

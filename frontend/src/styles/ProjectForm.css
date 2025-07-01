@@ -1,24 +1,37 @@
 .project-form {
-  margin-bottom: 24px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
 }
 
 .project-form input,
 .project-form textarea {
   width: 100%;
-  margin-bottom: 12px;
-  padding: 8px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.project-form textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
 .project-form button {
-  background-color: #3742fa;
-  color: white;
-  padding: 8px 16px;
+  padding: 0.6rem 1.2rem;
+  background-color: #007bff;
   border: none;
+  color: white;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .project-form button:hover {
-  background-color: #2f3542;
+  background-color: #0056b3;
 }

@@ -3,6 +3,7 @@ import React, { useState, useContext } from "react";
 import { register } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import "../../styles/RegisterForm.css"; // ✅ link to the CSS file
 
 const RegisterForm = () => {
   const { login: loginUser } = useContext(AuthContext);
@@ -31,21 +32,22 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <h2 className="text-xl font-semibold">Register</h2>
+    <form onSubmit={handleSubmit} className="form-wrapper">
+      <h2 className="form-title">Register</h2>
+
       <input
         name="username"
         value={form.username}
         onChange={handleChange}
         placeholder="Username"
-        className="border px-2 py-1 w-full"
+        className="form-input"
       />
       <input
         name="email"
         value={form.email}
         onChange={handleChange}
         placeholder="Email"
-        className="border px-2 py-1 w-full"
+        className="form-input"
       />
       <input
         name="password"
@@ -53,19 +55,19 @@ const RegisterForm = () => {
         value={form.password}
         onChange={handleChange}
         placeholder="Password"
-        className="border px-2 py-1 w-full"
+        className="form-input"
       />
       <select
         name="role"
         value={form.role}
         onChange={handleChange}
-        className="border px-2 py-1 w-full"
+        className="form-input"
       >
         <option value="engineer">Engineer</option>
         <option value="supervisor">Supervisor</option>
       </select>
-      {error && <p className="text-red-500">{error}</p>}
-      <button type="submit" className="bg-green-600 text-white px-4 py-1">
+      {error && <p className="form-error">{error}</p>}
+      <button type="submit" className="form-button">
         Register
       </button>
     </form>

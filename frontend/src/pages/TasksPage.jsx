@@ -1,12 +1,12 @@
 // src/pages/TasksPage.jsx
 import React from "react";
 import TaskList from "../components/tasks/TaskList";
+import "../styles/TaskPage.css"; // Add this line
 
-// Temporary static projectId = 1. Replace with dynamic routing later.
 const TasksPage = () => {
   return (
-    <div>
-      <h2>Tasks</h2>
+    <div className="task-page">
+      <h2 className="task-page-title">Tasks</h2>
       <TaskList projectId={1} />
     </div>
   );
