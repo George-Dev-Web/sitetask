@@ -40,9 +40,11 @@ export const ProjectProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (token) fetchProjects();
+    if (token && token !== "undefined") {
+      fetchProjects();
+    }
   }, [token]);
-
+  
   return (
     <ProjectContext.Provider
       value={{

@@ -58,35 +58,39 @@ class Task(db.Model):
 @app.route('/api/auth/register', methods=['POST'])
 def register():
     data = request.get_json()
-    
-    # Validate unique username/email
-    if User.query.filter_by(username=data['username']).first():
-        return jsonify({'error': 'Username exists'}), 400
-    if User.query.filter_by(email=data['email']).first():
-        return jsonify({'error': 'Email exists'}), 400
-    
-    # Create user
-    user = User(
-        username=data['username'],
-        email=data['email'],
-        role=data.get('role', 'engineer')
-    )
-    user.set_password(data['password'])
-    
+
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+    role = data.get('role', 'engineer')  # default to 'engineer' if not provided
+
+    if not username or not email or not password:
+        return jsonify({'error': 'Username, email, and password are required'}), 400
+
+    if User.query.filter_by(username=username).first():
+        return jsonify({'error': 'Username already exists'}), 400
+
+    if User.query.filter_by(email=email).first():
+        return jsonify({'error': 'Email already exists'}), 400
+
+    user = User(username=username, email=email, role=role)
+    user.set_password(password)
+
     db.session.add(user)
     db.session.commit()
-    
-    # Generate token with user ID as string
+
     access_token = create_access_token(identity=str(user.id))
-    
+
     return jsonify({
         'access_token': access_token,
         'user': {
             'id': user.id,
             'username': user.username,
+            'email': user.email,
             'role': user.role
         }
     }), 201
+
 
 @app.route('/api/auth/login', methods=['POST'])
 def login():
