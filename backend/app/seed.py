@@ -13,7 +13,7 @@ def seed():
         db.session.commit()
 
         # Seed users
-        user1 = User(username="alice", email="alice@gmail.com", role="engineer")
+        user1 = User(username="George", email="george@gmail.com", role="engineer")
         user1.set_password("password123")
 
         user2 = User(username="bob", email="bob@gmail.com", role="supervisor")

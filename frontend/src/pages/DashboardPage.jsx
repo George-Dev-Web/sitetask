@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import "../styles/DashboardPage.css";
 
 const DashboardPage = () => {
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext); // 👈 grab user too
   const [stats, setStats] = useState({
     projects: 0,
     tasks: 0,
@@ -41,6 +41,11 @@ const DashboardPage = () => {
 
   return (
     <div className="dashboard">
+      {/* 🎉 Greeting */}
+      <h2 className="welcome-text">
+        {user ? `Welcome, ${user.username}!` : "Welcome!"}
+      </h2>
+
       <h2>Dashboard Overview</h2>
 
       <div className="dashboard-cards">
