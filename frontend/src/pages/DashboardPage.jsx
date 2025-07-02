@@ -5,18 +5,18 @@ import { AuthContext } from "../context/AuthContext";
 import "../styles/DashboardPage.css";
 
 const DashboardPage = () => {
-  const { token, user } = useContext(AuthContext); // 👈 grab user too
+  const { token, user } = useContext(AuthContext);
   const [stats, setStats] = useState({
     projects: 0,
     tasks: 0,
     completed_tasks: 0,
     recent_projects: [],
   });
-
+  const [allTasks, setAllTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchStatsAndTasks = async () => {
       try {
         const res = await axios.get(
           `${import.meta.env.VITE_API_URL}/dashboard/stats`,
@@ -27,21 +27,41 @@ const DashboardPage = () => {
           }
         );
         setStats(res.data);
+
+        // Fetch tasks for each recent project
+        const taskPromises = res.data.recent_projects.map((project) =>
+          axios
+            .get(
+              `${import.meta.env.VITE_API_URL}/projects/${project.id}/tasks`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((taskRes) =>
+              taskRes.data.map((t) => ({ ...t, projectName: project.name }))
+            )
+        );
+
+        const taskArrays = await Promise.all(taskPromises);
+        const flatTaskList = taskArrays.flat();
+        setAllTasks(flatTaskList);
       } catch (err) {
-        console.error("Error fetching dashboard stats:", err);
+        console.error("Error fetching dashboard data:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchStats();
+    fetchStatsAndTasks();
   }, [token]);
 
   if (loading) return <p>Loading dashboard...</p>;
 
   return (
     <div className="dashboard">
-      {/* 🎉 Greeting */}
+      {/* 👋 Personalized greeting */}
       <h2 className="welcome-text">
         {user ? `Welcome, ${user.username}!` : "Welcome!"}
       </h2>
@@ -65,6 +85,7 @@ const DashboardPage = () => {
         </div>
       </div>
 
+      {/* 📁 Recent Projects */}
       <div className="recent-section">
         <h3>Recent Projects</h3>
         <div className="recent-projects">
@@ -75,6 +96,27 @@ const DashboardPage = () => {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* ✅ My Tasks */}
+      <div className="tasks-section">
+        <h3>My Tasks</h3>
+        {allTasks.length === 0 ? (
+          <p>No tasks found.</p>
+        ) : (
+          <ul className="task-list">
+            {allTasks.map((task) => (
+              <li
+                key={task.id}
+                className={`task-card ${task.status.toLowerCase()}`}
+              >
+                <strong>{task.title}</strong> - {task.status}
+                <br />
+                <small>Project: {task.projectName}</small>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
