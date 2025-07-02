@@ -330,7 +330,17 @@ def dashboard_stats():
 
 
 # --- Main Application ---
+
 if __name__ == '__main__':
+    # This ensures db.create_all() only runs locally
+    print("🛠️ Running locally — initializing database")
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+else:
+    # This ensures db.create_all() runs on Render only
+    if os.environ.get("RENDER"):
+        print("🚀 Detected Render — initializing database in production")
+        with app.app_context():
+            db.create_all()
+    print("🌐 Running on Render")
