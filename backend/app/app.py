@@ -25,7 +25,7 @@ CORS(app, resources={r"/*": {
     "origins": [
         "http://localhost:5173",   # for local dev
         "http://127.0.0.1:5173",   # just in case
-        "https://sitetask.vercel.app"  # for production
+        "https://sitetask.vercel.app",  # for production
         "https://sitetask-k81ekv6n0-georges-projects-9b076e43.vercel.app"
     ]
 }}, supports_credentials=True)
